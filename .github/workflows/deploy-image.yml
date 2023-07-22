@@ -24,10 +24,10 @@ jobs:
       - name: Build :latest
         if: success()
         # run: docker build -t yosaka/nvim:$(TZ=UTC-9 date '+%Y%m%d') .
-        run: docker build -t yosaka/manjarp:latest .
+        run: docker build -t yosaka/manjaro:latest .
 
       - name: Deploy :latest
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push yosaka/nvim:latest
+          args: push yosaka/manjaro:latest
