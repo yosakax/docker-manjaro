@@ -30,7 +30,7 @@ RUN cd \
  && cd .. \
  && rm -rf ./yay-bin
 
-RUN yay -Syu && yay -Sy --noconfirm --needed neovim nvm
+RUN yay -Syu && yay -Sy --noconfirm --needed neovim nvm tmux
 RUN  echo 'source /usr/share/nvm/init-nvm.sh' >> /home/${USERNAME}/.bashrc
 RUN source /usr/share/nvm/init-nvm.sh &&  nvm install --lts && node --version && npm --version
 
@@ -53,5 +53,7 @@ RUN ls -l /home/${USERNAME}/ && mkdir -p /home/${USERNAME}/.config/nvim && ln -s
 
 RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes && echo 'eval "$(starship init bash)"' >> /home/${USERNAME}/.bashrc
 RUN echo 'alias vim="nvim"' >> /home/${USERNAME}/.bashrc
+RUN echo 'alias l="ls -F"' >> /home/${USERNAME}/.bashrc
+RUN echo 'alias la="ls -aF"' >> /home/${USERNAME}/.bashrc
 
 WORKDIR /home/${USERNAME}
