@@ -1,4 +1,5 @@
 FROM manjarolinux/base:latest
+LABEL maintainer="Yasuhiro OSAKA(fallingfluit.gmail.com)"
 
 ARG BUILDERNAME=builder
 ARG USERNAME=yosaka
