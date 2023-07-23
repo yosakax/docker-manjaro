@@ -1,0 +1,33 @@
+name: Push to Docker registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+      - '.github/workflow/*.yml'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_REGISTRY_URL: docker.io
+
+      - name: Build :latest
+        if: success()
+        # run: docker build -t yosaka/nvim:$(TZ=UTC-9 date '+%Y%m%d') .
+        run: docker build -t yosaka/manjarp:latest .
+
+      - name: Deploy :latest
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push yosaka/nvim:latest
