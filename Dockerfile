@@ -31,7 +31,8 @@ RUN cd \
  && rm -rf ./yay-bin
 
 RUN yay -Syu && yay -Sy --noconfirm --needed neovim nvm tmux
-RUN  echo 'source /usr/share/nvm/init-nvm.sh' >> /home/${USERNAME}/.bashrc
+RUN curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && echo 'source /usr/share/nvm/init-nvm.sh' >> /home/${USERNAME}/.bashrc
 RUN source /usr/share/nvm/init-nvm.sh &&  nvm install --lts && node --version && npm --version
 
 RUN curl https://pyenv.run | bash && \
