@@ -3,7 +3,10 @@ services:
   app:
     image: yosaka/manjaro:test
     command: /bin/bash
+    environment:
+      - DISPLAY=$DISPLAY
     volumes:
       - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
     tty: true
     stdin_open: true
